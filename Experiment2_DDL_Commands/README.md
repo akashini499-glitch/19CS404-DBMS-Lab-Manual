@@ -105,123 +105,312 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- In the Employee table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+EmployeeID  Name          Position    Department  Salary
+----------  ------------  ----------  ----------  ----------
+5           George Clark  Consultant
+7           Noah Davis    Manager     HR          60000
+8           Ava Miller    Consultant  IT
+ 
+
+For example:
+
+Test	Result
+SELECT * FROM Employee;
+EmployeeID  Name          Position    Department  Salary
+----------  ------------  ----------  ----------  ----------
+5           George Clark  Consultant
+7           Noah Davis    Manager     HR          60000
+8           Ava Miller    Consultant  IT
+
 
 ```sql
--- Paste your SQL code below for Question 1
+INSERT INTO EMPLOYEE(EmployeeID,Name,Position,Department,Salary)
+VALUES(5,'George Clark','Consultant',NULL,NULL);
+
+INSERT INTO EMPLOYEE(EmployeeID,Name,Position,Department,Salary)
+VALUES(7,'Noah Davis','Manager','HR',60000);
+
+INSERT INTO Employee(EmployeeID,Name,Position,Department,Salary)
+VALUES(8,'Ava Miller','Consultant','IT',NULL);
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1237" height="377" alt="image" src="https://github.com/user-attachments/assets/f2860097-28b4-4eb3-b484-d64a1fe2250c" />
+
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+-- create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
+For example:
+
+Test	Result
+INSERT INTO jobs (job_id, job_title, min_salary, max_salary) VALUES (1, 'Software Engineer', 9000, 15000);
+SELECT * FROM jobs;
+job_id      job_title          min_salary  max_salary
+----------  -----------------  ----------  ----------
+1           Software Engineer  9000        15000
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE jobs(
+       job_id INT,
+       job_title VARCHAR(255) DEFAULT ' ',
+       min_salary DECIMAL(10,2) DEFAULT 8000,
+       max_salary DECIMAL(10,2) DEFAULT NULL
+       );
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1235" height="407" alt="image" src="https://github.com/user-attachments/assets/057dc7aa-53ac-474c-bef5-f920d7ebb469" />
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Insert the below data into the Books table, allowing the Publisher and Year columns to take their default values.
+
+ISBN             Title                 Author
+---------------  --------------------  ---------------
+978-6655443321   Big Data Analytics    Karen Adams
+
+Note: The Publisher and Year columns will use their default values.
+ 
+ 
+For example:
+
+Test	Result
+SELECT ISBN, Title, Author
+FROM Books 
+
+
+ISBN             Title                 Author
+---------------  --------------------  ---------------
+978-6655443321   Big Data Analytics    Karen Adams
 
 ```sql
--- Paste your SQL code below for Question 3
+-- INSERT INTO Books(ISBN,Title,Author)
+VALUES('978-6655443321','Big Data Analytics','Karen Adams');
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1230" height="392" alt="image" src="https://github.com/user-attachments/assets/ae768310-eae6-4212-a03c-fc1eefac7a06" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Write an SQL command can to add a column named email of type TEXT to the customers table
+
+ 
+
+For example:
+
+Test	Result
+pragma table_info('Customers');
+cid         name        type        notnull     dflt_value  pk
+----------  ----------  ----------  ----------  ----------  ----------
+0           id          integer     0                       0
+1           name        text        0                       0
+2           email       TEXT        0                       0
+
 
 ```sql
--- Paste your SQL code below for Question 4
+--ALTER TABLE Customers ADD COLUMN email TEXT;
 ```
-
 **Output:**
+<img width="1230" height="362" alt="image" src="https://github.com/user-attachments/assets/4886c16a-3c1b-47f0-9167-432823ad7b47" />
 
-![Output4](output.png)
 
 **Question 5**
 ---
--- Paste Question 5 here
+--Create a table named ProjectAssignments with the following constraints:
+AssignmentID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+ProjectID as INTEGER should be a foreign key referencing Projects(ProjectID).
+AssignmentDate as DATE should be NOT NULL.
+For example:
+
+Test	Result
+INSERT INTO ProjectAssignments (AssignmentID, EmployeeID, ProjectID, AssignmentDate) VALUES (2, 99, 1, '2024-01-03');
+Error: FOREIGN KEY constraint failed
+
 
 ```sql
--- Paste your SQL code below for Question 5
+-- CREATE TABLE ProjectAssignments(
+      AssignmentID INTEGER PRIMARY KEY,
+      EmployeeID INTEGER,
+      ProjectID INTEGER,
+      AssignmentDate DATE NOT NULL,
+      FOREIGN KEY(EmployeeID) REFERENCES Employees(EmployeeID),
+      FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID)
+      
+
+)
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1241" height="355" alt="image" src="https://github.com/user-attachments/assets/2a5ea324-e789-48e8-b1f7-850eace2883e" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Write an SQL query to change the name of the column id to employee_id in the table employee.
+
+ 
+
+ 
+
+ 
+
+ 
+
+For example:
+
+Test	Result
+pragma table_info('employee');
+cid         name         type        notnull     dflt_value  pk
+----------  -----------  ----------  ----------  ----------  ----------
+0           employee_id  integer     0                       0
+1           salary       number      0                       0
 
 ```sql
--- Paste your SQL code below for Question 6
+-- ALTER TABLE employee RENAME COLUMN id TO employee_id;
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1225" height="340" alt="image" src="https://github.com/user-attachments/assets/c75e5b20-c0ec-412b-81e8-4f2e9c818f01" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Create a new table named products with the following specifications:
+product_id as INTEGER and primary key.
+product_name as TEXT and not NULL.
+list_price as DECIMAL (10, 2) and not NULL.
+discount as DECIMAL (10, 2) with a default value of 0 and not NULL.
+A CHECK constraint at the table level to ensure:
+list_price is greater than or equal to discount
+discount is greater than or equal to 0
+list_price is greater than or equal to 0
+For example:
+
+Test	Result
+INSERT INTO products (product_id, product_name, list_price) VALUES (2, 'Product B', 50.00);
+SELECT * FROM products;
+product_id  product_name  list_price  discount
+----------  ------------  ----------  ----------
+2           Product B     50          0
+
 
 ```sql
--- Paste your SQL code below for Question 7
+-- CREATE TABLE products (
+       product_id INTEGER,
+       product_name TEXT NOT NULL,
+       list_price DECIMAL(10,2) NOT NULL,
+       discount DECIMAL(10,2) DEFAULT 0 NOT NULL,
+       PRIMARY KEY(product_id),
+       CHECK(list_price>=discount AND discount >=0 AND list_price >=0)
+       
+
+
+)
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1237" height="365" alt="image" src="https://github.com/user-attachments/assets/2cbd1aa2-40f8-400d-a70b-97975b284786" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+--Create a table named Department with the following constraints:
+DepartmentID as INTEGER should be the primary key.
+DepartmentName as TEXT should be unique and not NULL.
+Location as TEXT.
+For example:
+
+Test	Result
+INSERT INTO Department (DepartmentID, DepartmentName, Location) VALUES (1, 'Human Resources', 'New York');
+select * from Department;
+DepartmentID  DepartmentName   Location
+------------  ---------------  ----------
+1             Human Resources  New York
+
 
 ```sql
--- Paste your SQL code below for Question 8
+--CREATE TABLE Department(
+          DepartmentID INTEGER PRIMARY KEY,
+          DepartmentName TEXT NOT NULL UNIQUE,
+          Location TEXT
+
+
+);
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1218" height="348" alt="image" src="https://github.com/user-attachments/assets/c9daca76-e376-4be2-8758-9844b497dff4" />
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Create a table named Invoices with the following constraints:
+
+InvoiceID as INTEGER should be the primary key.
+InvoiceDate as DATE.
+DueDate as DATE should be greater than the InvoiceDate.
+Amount as REAL should be greater than 0.
+For example:
+
+Test	Result
+INSERT INTO Invoices (InvoiceID, InvoiceDate)
+VALUES (1, '2024-08-08'),(1,'2024-09-08');
+Error: UNIQUE constraint failed: Invoices.InvoiceID
+
 
 ```sql
--- Paste your SQL code below for Question 9
+--CREATE TABLE Invoices(
+       InvoiceID INTEGER PRIMARY KEY,
+       InvoiceDate DATE,
+       DueDate DATE,
+       Amount REAL,
+       CHECK(Duedate>=InvoiceDate AND Amount >=0)
+
+
+
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1212" height="352" alt="image" src="https://github.com/user-attachments/assets/adfd6863-3530-40f5-a205-6d8203cfa82d" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+--Insert a customer with CustomerID 301, Name Michael Jordan, Address 123 Maple St, City Chicago, and ZipCode 60616 into the Customers table.
+
+For example:
+
+Test	Result
+SELECT * FROM Customers WHERE CustomerID = 301;
+CustomerID  Name            Address       City        ZipCode
+----------  --------------  ------------  ----------  ----------
+301         Michael Jordan  123 Maple St  Chicago     60616
+
 
 ```sql
--- Paste your SQL code below for Question 10
+-- INSERT INTO Customers(CustomerID,Name,Address,City,Zipcode)
+VALUES(301,'Michael Jordan','123 Maple St','Chicago','60616');
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1228" height="320" alt="image" src="https://github.com/user-attachments/assets/d30f0dd4-1724-42b7-9098-2cc49613f851" />
+
 
 
 ## RESULT
