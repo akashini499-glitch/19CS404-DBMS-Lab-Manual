@@ -47,123 +47,364 @@ SELECT column1, column2 FROM table_name WHERE condition;
 ```
 **Question 1**
 --
--- Paste Question 1 here
+-- Write a SQL query to Delete customers from 'customer' table where 'WORKING_AREA' is 'New York'.
+
+Sample table: Customer
+
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
+|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
+| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
+| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
+| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSBB      | A008       |
+For example:
+
+Test	Result
+select changes();
+CUST_CODE   CUST_NAME   CUST_CITY   WORKING_AREA  CUST_COUNTRY  GRADE       OPENING_AMT  RECEIVE_AMT  PAYMENT_AMT  OUTSTANDING_AMT  PHONE_NO    AGENT_CODE
+----------  ----------  ----------  ------------  ------------  ----------  -----------  -----------  -----------  ---------------  ----------  ----------
+C00001      Micheal     New York    New York      USA           2           3000         5000         2000         6000             CCCCCCC     A008
+C00020      Albert      New York    New York      USA           3           5000         7000         6000         6000             BBBBSBB     A008
+C00002      Bolt        New York    New York      USA           3           5000         7000         9000         3000             DDNRDRH     A008
+changes()
+----------
+3
+
 
 ```sql
--- Paste your SQL code below for Question 1
+--DELETE FROM customer
+WHERE WORKING_AREA='New York';
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1242" height="842" alt="image" src="https://github.com/user-attachments/assets/76757868-6a31-4df8-a3b1-dcb3afdeb140" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+--Write a SQL query to delete a specific doctor from Doctors table whose ID is 1.
+
+Sample table: Doctors
+
+attributes: doctor_id, first_name, last_name, specialization
+
 
 ```sql
--- Paste your SQL code below for Question 2
+-- DELETE FROM Doctors
+WHERE doctor_id=1;
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1231" height="348" alt="image" src="https://github.com/user-attachments/assets/fd2bd23b-b244-4ca7-bb4e-617a92490345" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+--Write a SQL query to retrieve all employee names in lower case. 
+
+Table name: emp
+
+name        type
+----------  ----------
+empno       INT
+ename       VARCHAR(100)
+job         VARCHAR(50)
+mgr         INT
+hiredate    DATE
+sal         DECIMAL(10,2)
+comm        DECIMAL(10,2)
+deptno      INT
+For example:
+
+Result
+EmpName
+----------
+king
+jones
+clark
+scott
+ford
+miller
+
 
 ```sql
--- Paste your SQL code below for Question 3
+--SELECT LOWER(ename) AS EmpName 
+FROM emp;
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1217" height="367" alt="image" src="https://github.com/user-attachments/assets/dd558af2-913a-497f-b3ac-7047f8612c97" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Write a SQL query to round the decimal column to 3 decimal places from the Calculations table.
+
+cid         name        type        notnull     dflt_value  pk
+----------  ----------  ----------  ----------  ----------  ----------
+0           id          INTEGER     0                       1
+1           value1      REAL        0                       0
+2           value2      REAL        0                       0
+3           base        INTEGER     0                       0
+4           exponent    INTEGER     0                       0
+5           number      REAL        0                       0
+6           decimal     REAL        0                       0
+ 
+
+For example:
+
+Result
+id          rounded_value
+----------  -------------
+1           123.457
+2           567.891
+3           78.234
+4           45.78
+
 
 ```sql
--- Paste your SQL code below for Question 4
+-- SELECT 
+id,
+ROUND(decimal,3) AS rounded_value
+FROM calculations;
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1233" height="617" alt="image" src="https://github.com/user-attachments/assets/13271e9f-44a0-41e4-8407-ce11ac7ae96e" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- Write a SQL statement to Increase the selling price by 10% for all products in the 'Bakery' category in the products table.
+
+Products table
+
+---------------
+product_id
+product_name
+category
+cost_price
+sell_price
+reorder_lvl
+quantity
+supplier_id
 
 ```sql
--- Paste your SQL code below for Question 5
+-- UPDATE Products
+SET sell_price=sell_price*1.10
+WHERE category='Bakery';
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1227" height="418" alt="image" src="https://github.com/user-attachments/assets/233e1aef-4c80-4156-8853-d59cc15f3b78" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Write a query to fetch last 5 rows in EmployeeInfo table.
+
+EmpID
+
+EmpFname
+
+EmpLname
+
+Department
+
+Project
+
+Address
+
+DOB
+
+Gender
+
+1
+
+Sanjay
+
+Mehra
+
+HR
+
+P1
+
+Hyderabad(HYD)
+
+01/12/1976
+
+M
+
+2
+
+Ananya
+
+Mishra
+
+Admin
+
+P2
+
+Delhi(DEL)
+
+02/05/1968
+
+F
+
+ 
+
+For example:
+
+Result
+EmpID       EmpFname    EmpLname    Department  Project     Address     DOB         Gender
+----------  ----------  ----------  ----------  ----------  ----------  ----------  ----------
+5           Ankit       Kapoor      Admin       P2          Delhi(DEL)  1994-07-03  M
+4           Sonia       Kulkarni    HR          P1          Hyderabad(  1992-05-02  F
+3           Rohan       Diwan       Account     P3          Mumbai(BOM  1980-01-01  M
+2           Ananya      Mishra      Admin       P2          Delhi(DEL)  1968-05-02  F
+1           Sanjay      Mehra       HR          P1          Hyderabad(  1976-12-01  M
+
 
 ```sql
--- Paste your SQL code below for Question 6
+-- SELECT *
+FROM EmployeeInfo
+ORDER BY EmpID DESC
+LIMIT 5;
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1230" height="452" alt="image" src="https://github.com/user-attachments/assets/83af46c9-f9e3-43e4-bbdf-802fcdeca107" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Write a SQL query to retrieve the year, month, and day from the hiredate column in the emp table.
+
+For example:
+
+Result
+Year        Month       Day
+----------  ----------  ----------
+1981        04          02
+1981        09          28
+1981        05          01
+1981        06          09
+1982        12          09
+1981        11          17
+1981        09          08
+
 
 ```sql
--- Paste your SQL code below for Question 7
+-- SELECT strftime('%Y',hiredate) AS Year,
+       strftime('%m',hiredate) AS Month,
+       strftime('%d',hiredate) AS Day
+FROM emp;
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1235" height="478" alt="image" src="https://github.com/user-attachments/assets/f3b792ce-c730-49e7-80db-6944ea61cfc3" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- Write a SQL query to delete a doctor from Doctors table whose Specialization is 'Pediatrics' and First name is 'Michael'.
+
+Sample table: Doctors
+
+attributes: doctor_id, first_name, last_name, specialization
 
 ```sql
--- Paste your SQL code below for Question 8
+--DELETE FROM Doctors
+WHERE specialization='Pediatrics' AND first_name='Michael';
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1235" height="647" alt="image" src="https://github.com/user-attachments/assets/35f4baae-57c8-4ba2-ab3b-10bd36cd2d93" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Write a SQL query to Delete customers from 'customer' table where 'GRADE' is less than 2.
+
+ 
+Sample table: Customer
+
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
+|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
+| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
+| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
+| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSBB      | A008       |
+For example:
+
+Test	Result
+select distinct(grade)from customer;
+GRADE
+----------
+2
+3
+1
+0
+GRADE
+----------
+2
+3
+
 
 ```sql
--- Paste your SQL code below for Question 9
+-- DELETE FROM customer
+WHERE GRADE<2;
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1228" height="540" alt="image" src="https://github.com/user-attachments/assets/a5cfaba8-9b2a-4840-8e8f-ea19735bea51" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Write a SQL query to reduce the reorder level by 30% where cost price is more than 50 and quantity in stock is less than 100 in the products table.
+
+Products Table 
+
+name          type       
+----------    ---------- 
+product_id     INT PRIMARY KEY        
+product_name   VARCHAR(10) 
+category       VARCHAR(50) 
+cost_price     DECIMAL(10) 
+sell_price     DECIMAL(10) 
+reorder_lvl    INT        
+quantity       INT        
+supplier_id    INT               
+For example:
+
+Test	Result
+--pragma table_info('products');
+select changes();
+changes()
+----------
+2
+
 
 ```sql
--- Paste your SQL code below for Question 10
+--UPDATE products
+SET reorder_lvl=reorder_lvl*0.7
+WHERE cost_price>50 AND QUANTITY <100;
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1228" height="540" alt="image" src="https://github.com/user-attachments/assets/78e8c68e-b85b-4c0d-8788-278f74a23186" />
+
 
 ## RESULT
 Thus, the SQL queries to implement DML commands have been executed successfully.
