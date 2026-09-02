@@ -38,123 +38,343 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+--Write a SQL query to return the total number of rows in the 'customer' table where the city is Noida.
+
+Sample table: customer
+
+
+
+ 
+
+For example:
+
+Result
+COUNT
+----------
+1
+
 
 ```sql
--- Paste your SQL code below for Question 1
+--SELECT count(*) as COUNT
+from customer
+where city='Noida';
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1232" height="392" alt="image" src="https://github.com/user-attachments/assets/a7b63612-7911-4862-bee6-584acddb84bb" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+-- Write a SQL query to find the average length of email addresses (in characters):
+
+Table: customer
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+city        TEXT
+email       TEXT
+phone       INTEGER
+For example:
+
+Result
+avg_email_length
+----------------
+15.0
+
 
 ```sql
--- Paste your SQL code below for Question 2
+-- SELECT avg(length(email)) as avg_email_length
+from customer
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1221" height="391" alt="image" src="https://github.com/user-attachments/assets/223157a8-ee6a-4224-8f65-3cde72c28425" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Write a SQL query to find the maximum purchase amount.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
+
+ 
+
+For example:
+
+Result
+MAXIMUM
+----------
+5760.0
+
 
 ```sql
--- Paste your SQL code below for Question 3
+-- select max(purch_amt) as MAXIMUM
+FROM orders
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1228" height="397" alt="image" src="https://github.com/user-attachments/assets/6f8c0efc-67a3-496e-9a14-2e6794d79295" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- How many patients have insurance coverage valid in each year?
+
+Sample table:Insurance Table
+
+name               type
+-----------------  ----------
+InsuranceID        INTEGER
+PatientID          INTEGER
+InsuranceCompany   TEXT
+PolicyNumber       TEXT
+PolicyHolder       TEXT
+ValidityPeriod     TEXT
+For example:
+
+Result
+ValidityYear  TotalPatients
+------------  -------------
+2024          3
+2025          1
+2027          4
+2031          2
+
 
 ```sql
--- Paste your SQL code below for Question 4
+-- SELECT SUBSTR(ValidityPeriod,1,4) as ValidityYear,
+count(PatientID) as TotalPatients
+from Insurance
+group by ValidityPeriod
+order by ValidityYear ASC;
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1207" height="468" alt="image" src="https://github.com/user-attachments/assets/71eb0fae-5914-4146-bee7-933b6804b4de" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- How many appointments are scheduled in each hour of the day?
+
+Sample table:Appointments Table
+
+name                              type
+--------------------          ----------
+AppointmentID               INTEGER
+PatientID                         INTEGER
+DoctorID                         INTEGER
+AppointmentDateTime   DATETIME
+Purpose                           TEXT
+Status                              TEXT     
+
+For example:
+
+Result
+HourOfDay   TotalAppointments
+----------  -----------------
+09          2
+10          5
+11          1
+14          1
+16          1
+
 
 ```sql
--- Paste your SQL code below for Question 5
+-- SELECT strftime('%H',AppointmentDateTime) as HourOfDay,count(AppointmentID) as TotalAppointments
+from Appointments
+group by HourOfDay
+order by HourOfDay;
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1227" height="605" alt="image" src="https://github.com/user-attachments/assets/d9fc0fb6-3d30-45d5-899c-6eeea68e4d64" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- How many prescriptions were written in each frequency category (e.g., once daily, twice daily)?
+
+Sample tablePrescriptions Table
+
+
+
+For example:
+
+Result
+Frequency      TotalPrescriptions
+-------------  ------------------
+Every 3 weeks  1
+Every 6 hours  1
+Once           1
+Once daily     4
+Once daily at  1
+Pending        1
+Twice daily    1
+
 
 ```sql
--- Paste your SQL code below for Question 6
+-- SELECT Frequency,count(*) as TotalPrescriptions
+from Prescriptions
+group by Frequency
+order by Frequency;
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1232" height="602" alt="image" src="https://github.com/user-attachments/assets/3e27dbe4-3ec7-4956-8218-0d6e3f8e8bbb" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Write the SQL query that achieves the grouping of data by city, calculates the average income for each city, and includes only those cities where the average income is greater than 500,000.
+
+Sample table: employee
+
+
+
+For example:
+
+Result
+city        AVG(income)
+----------  -----------
+Arizona     1000000.0
+California  2650000.0
+Florida     2675000.0
+
 
 ```sql
--- Paste your SQL code below for Question 7
+-- select city,AVG(income)
+from employee
+group by city
+having avg(income)>500000;
+
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1228" height="525" alt="image" src="https://github.com/user-attachments/assets/06fd212f-9cea-48e9-b830-1e2abbf09896" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- Write the SQL query that accomplishes the grouping of data by addresses, calculates the sum of salaries for each address, and excludes addresses where the total salary sum is not greater than 2000.
+
+Sample table: customer1
+
+
+
+For example:
+
+Result
+address     SUM(salary)
+----------  -----------
+Bhopal      8500
+Hyderabad   4500
+Indore      10000
+Mumbai      6500
+
 
 ```sql
--- Paste your SQL code below for Question 8
+-- select address,SUM(salary)
+from customer1
+group by address
+having SUM(salary)>2000;
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1230" height="562" alt="Screenshot 2026-09-02 214257" src="https://github.com/user-attachments/assets/1228d54e-d99c-4404-a6b9-184d8a67fae8" />
+
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Write a SQL query to calculate the average purchase amount of all orders. Return average purchase amount.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
+
+ 
+
+For example:
+
+Result
+AVERAGE
+----------
+1461.765
+
 
 ```sql
--- Paste your SQL code below for Question 9
+-- SELECT AVG(purch_amt) AS AVERAGE
+FROM orders
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1220" height="392" alt="image" src="https://github.com/user-attachments/assets/8afc3418-a884-43e9-99ff-f0e68f13a725" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Write a SQL query to calculate total purchase amount of all orders. Return total purchase amount.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
+
+For example:
+
+Result
+TOTAL
+----------
+17541.18
+
 
 ```sql
--- Paste your SQL code below for Question 10
+-- SELECT SUM(purch_amt) AS TOTAL
+FROM orders
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1222" height="383" alt="image" src="https://github.com/user-attachments/assets/471aa5b4-896b-44bd-963f-db5456b7f01f" />
+
 
 
 ## RESULT
